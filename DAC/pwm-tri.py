@@ -24,8 +24,10 @@ while True:
     time.sleep(dt)
     t += dt
     while (duty > 0.0):
-        duty = k * rrr * (dt)
+        duty = k * rrr * (t)
+    t = 0.
     while (duty < 100.0):
-    duty = k * rrr * (dt)
-    #print(duty)
+        duty = k * rrr * (1 - t)
+    
+    print(duty)
 
