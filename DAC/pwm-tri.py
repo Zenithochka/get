@@ -9,22 +9,24 @@ GPIO.setwarnings(False)
 #GPIO.setup(23, GPIO.OUT)
 GPIO.setup(12, GPIO.OUT)
 
-pwm = GPIO.PWM(12, 1000)
+st = 100
+pwm = GPIO.PWM(12, st)
 duty = 0.0
-k = 100.0
+A = 3.0
+N = 1
 t = 0.0
-q = 2.
-#p = 10.
-p = 0.001
-#rrr = 3.3 * 1. #0.001
 dt = 0.001
 pwm.start(duty)
 
 
+
+def tri(t):
+    return 4 * A * N * abs(((t - 1/(8 * N)) % (1 / (2 * N))) - 1/(4 * N))
+
 while True:
     t += dt
-    
-    pwm.ChangeDutyCycle(duty)
-    duty = k * (1.0- abs(2.0 * (t % p) / p - 1.0))
     time.sleep(dt)
-    print(duty)
+    pwm.ChangeDutyCycle(tri(t) / 3.183 * 255)
+
+
+    
