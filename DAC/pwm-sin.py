@@ -13,7 +13,7 @@ pwm = GPIO.PWM(12, 100)
 duty = 0.0
 k = 1.0
 t = 0.0
-dt = 0.01
+dt = 0.001
 pwm.start(duty)
 
 while True:

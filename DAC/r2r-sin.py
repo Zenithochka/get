@@ -5,9 +5,9 @@ import math
 
 dac = R2R_DAC([16, 20, 21, 25, 26, 17, 27, 22], 3.183)
 
-A = 1.6
-freq = 1000
-dt = 0.000001
+A = 3.0
+freq = 1
+dt = 0.001
 t = 0
 
 '''
@@ -23,7 +23,7 @@ dynamic_range = 3.3
 '''
 
 def get_sin_wave_amplitude(freq, t):
-    return 2 * math.pi * t * freq
+    return 4 * math.pi * t * freq
 
 while True:
     t += dt
