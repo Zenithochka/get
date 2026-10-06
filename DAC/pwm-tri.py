@@ -14,6 +14,8 @@ duty = 0.0
 k = 100.0
 t = 0.0
 q = 2.
+#p = 10.
+p = 0.001
 #rrr = 3.3 * 1. #0.001
 dt = 0.001
 pwm.start(duty)
@@ -23,6 +25,6 @@ while True:
     t += dt
     
     pwm.ChangeDutyCycle(duty)
-    duty = k * (t - abs(t))/t
+    duty = k * (1.0- abs(2.0 * (t % p) / p - 1.0))
     time.sleep(dt)
     print(duty)

@@ -5,9 +5,9 @@ import math
 
 dac = R2R_DAC([16, 20, 21, 25, 26, 17, 27, 22], 3.183)
 
-A = 1.6
-N = 1000
-dt = 0.000001
+A = 3.1
+N = 1
+dt = 0.001
 t = 0
 
 '''
@@ -23,7 +23,7 @@ dynamic_range = 3.3
 '''
 
 def tri(t):
-    return 4 * A * N * abs(((t - 1/(4 * N)) % (1 / N)) - 1/(2 * N)) + A
+    return 4 * A * N * abs(((t - 1/(8 * N)) % (1 / 2 * N)) - 1/(4 * N))# + 0.5 * A
 
 while True:
     t += dt
