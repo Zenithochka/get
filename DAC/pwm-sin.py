@@ -12,7 +12,7 @@ GPIO.setup(12, GPIO.OUT)
 st = 100
 pwm = GPIO.PWM(12, st)
 A = 3.0
-freq = 10
+freq = 1
 duty = 0.0
 t = 0.0
 dt = 0.001
@@ -24,4 +24,4 @@ def get_sin_wave_amplitude(freq, t):
 while True:
     t += dt
     time.sleep(dt)
-    pwm.ChangeDutyCycle(((1 + math.sin(get_sin_wave_amplitude(freq, t))) * A / 2) / 3.183 * 255)
+    pwm.ChangeDutyCycle(((1 + math.sin(get_sin_wave_amplitude(freq, t))) * A / 2) / 3.183 * 100)

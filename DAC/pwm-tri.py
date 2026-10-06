@@ -26,7 +26,7 @@ def tri(t):
 while True:
     t += dt
     time.sleep(dt)
-    pwm.ChangeDutyCycle(tri(t) / 3.183 * 255)
+    pwm.ChangeDutyCycle(tri(t) / 3.183 * 100)
 
 
     
