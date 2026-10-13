@@ -9,17 +9,17 @@ GPIO.setwarnings(False)
 #GPIO.setup(23, GPIO.OUT)
 GPIO.setup(12, GPIO.OUT)
 
-st = 100
+st = 1000
 pwm = GPIO.PWM(12, st)
 A = 3.0
-freq = 1
+freq = 0.5
 duty = 0.0
 t = 0.0
 dt = 0.001
 pwm.start(duty)
 
 def get_sin_wave_amplitude(freq, t):
-    return 4 * math.pi * t * freq
+    return 4 * math.pi * t * freq / 2
 
 while True:
     t += dt

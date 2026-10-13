@@ -9,7 +9,7 @@ GPIO.setwarnings(False)
 #GPIO.setup(23, GPIO.OUT)
 GPIO.setup(12, GPIO.OUT)
 
-st = 100
+st = 1000
 pwm = GPIO.PWM(12, st)
 duty = 0.0
 A = 3.0
@@ -21,7 +21,7 @@ pwm.start(duty)
 
 
 def tri(t):
-    return 4 * A * N * abs(((t - 1/(8 * N)) % (1 / (2 * N))) - 1/(4 * N))
+    return 4 * A * (N / 2) * abs(((t - 1/(8 * (N / 2))) % (1 / (2 * (N / 2)))) - 1/(4 * (N / 2)))
 
 while True:
     t += dt
