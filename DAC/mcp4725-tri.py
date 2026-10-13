@@ -3,7 +3,7 @@ import RPi.GPIO as GPIO
 import time
 import math  
 
-dac = MCP4725(3.183)
+dac = MCP4725(5.11)
 
 A = 3.0
 N = 1
