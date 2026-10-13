@@ -1,9 +1,9 @@
-from mcp4725_driver import MCP4725DRV
+from mcp4725_driver import MCP4725
 import RPi.GPIO as GPIO
 import time
 import math  
 
-dac = MCP4725DRV(3.183)
+dac = MCP4725(3.183)
 
 A = 3.0
 N = 1
