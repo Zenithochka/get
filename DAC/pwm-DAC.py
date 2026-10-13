@@ -10,6 +10,7 @@ GPIO.setwarnings(False)
 GPIO.setup(12, GPIO.OUT)
 
 pwm = GPIO.PWM(12, 1000)
+rez = 2
 duty = 0.0
 k = 1.0
 t = 0.0
@@ -18,8 +19,4 @@ dt = 0.001
 pwm.start(duty)
 
 while True:
-    pwm.ChangeDutyCycle(duty)
-    time.sleep(dt)
-    t += dt
-    duty = k * 50. * (math.sin(t * q) + 1.)
-    #print(duty)
+    pwm.ChangeDutyCycle(100.*rez/3.3)
