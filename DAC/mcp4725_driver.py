@@ -38,4 +38,17 @@ class MCP4725:
                 return 0
             self.set_number(int(voltage / self.dynamic_range * 4096))
 
+if __name__ == "__main__":
+    try:
+        dac = MCP4725(3.183, True)
         
+        while True:
+            try:
+                voltage = float(input("Введите напряжение в Вольтах: "))
+                dac.set_voltage(voltage)
+
+            except ValueError:
+                print("Вы ввели не число. Попробуйте ещё раз\n")
+
+    finally:
+        dac.deinit()
