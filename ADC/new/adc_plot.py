@@ -2,6 +2,8 @@ import r2r_adc as adc
 import matplotlib.pyplot as plt
 import time
 
+#GPIO.setwarnings(False)
+
 def plot_voltage_vs_time(time, voltage, max_voltage):
     plt.figure(figsize=(10,6))
     plt.plot(time, voltage)

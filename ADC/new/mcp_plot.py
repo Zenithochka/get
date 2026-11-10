@@ -21,17 +21,22 @@ if __name__ == "__main__":
         time_del = []
         duration = 3.0
         st=time.time()
+        '''
         while True:
-            try:
-                while(time.time()-st<3):
-                    ms=time.time()
-                    voltage_values.append(adcp.get_voltage())
-                    time_del.append(time.time()-ms)
-                    time_values.append(time.time()-st)                
-                plot_voltage_vs_time(time_values, voltage_values, 0)
-                plot_sampling_period_hist(time_del)
-            except ValueError:
-                print("Вы ввели не число. Попробуйте ещё раз\n")
-
+            if (time.time()-st<3):
+                try:
+                '''
+        while(time.time()-st<3):
+            ms=time.time()
+            voltage_values.append(adcp.get_voltage())
+            time_del.append(time.time()-ms)
+            time_values.append(time.time()-st)                
+                    #plot_voltage_vs_time(time_values, voltage_values, 0)
+                    #plot_sampling_period_hist(time_del)
+                #except ValueError:
+                    #print("Вы ввели не число. Попробуйте ещё раз\n")
+            time.sleep(0.005)
+        plot_voltage_vs_time(time_values, voltage_values, 0)
+        plot_sampling_period_hist(time_del)
     finally:
         adcp.deinit()

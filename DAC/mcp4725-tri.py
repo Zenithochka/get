@@ -6,7 +6,7 @@ import math
 dac = MCP4725(5.11)
 
 A = 3.0
-N = 1
+N = 2
 dt = 0.001
 t = 0
 
@@ -28,4 +28,4 @@ def tri(t):
 while True:
     t += dt
     time.sleep(dt)
-    dac.set_voltage(tri(t))
+    dac.set_voltage(tri(t    
