@@ -1,0 +1,76 @@
+import RPi.GPIO as GPIO
+import time
+
+class R2R_ADC:
+    def __init__(self, dynamic_range, compare_time, verbose = False):
+        self.dynamic_range = dynamic_range
+        self.verbose = verbose
+        self.compare_time = compare_time
+        
+        self.bits_gpio = [26, 20, 19, 16, 13, 12, 25, 11]
+        self.comp_gpio = 21
+
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(self.bits_gpio, GPIO.OUT, initial = 0)
+        GPIO.setup(self.comp_gpio, GPIO.IN)
+
+    def dec2bin(self, value):
+        return [int(element) for element in bin(value)[2:].zfill(8)]
+
+    def number_to_dac(self, number):
+        GPIO.output(self.bits_gpio, self.dec2bin(number))
+
+    def sequential_counting_adc(self):
+        i=0
+        while(i<256):
+            self.number_to_dac(i)
+            time.sleep(self.compare_time)
+            if(GPIO.input(self.comp_gpio)==1):
+                return i/255*self.dynamic_range
+            i=i+1
+        return i/255*self.dynamic_range
+
+    def bin_adc(self):
+        i=0
+        while(i<256):
+            self.number_to_dac(i)
+            time.sleep(self.compare_time)
+            if(GPIO.input(self.comp_gpio)==1):
+                return i/255*self.dynamic_range
+            i=i+1
+        return i/255*self.dynamic_range
+
+    def bin_sar(self):
+        i=0
+        a=0
+        b=255
+        c=0
+        while(c<10):
+            i=int(float((float(a+b))/2))
+            self.number_to_dac(i)
+            time.sleep(self.compare_time)
+            if(GPIO.input(self.comp_gpio)==0):
+                a=int(float((float(a+b))/2))
+            else:
+                b=int(float((float(a+b))/2))
+            c=c+1
+        return i/255*self.dynamic_range
+
+    def deinit(self):
+            GPIO.output(self.bits_gpio, 0)
+            GPIO.cleanup()
+
+if __name__ == "__main__":
+    try:
+        adc = R2R_ADC(3.14, 0.01, True)
+        
+        while True:
+            try:
+                print(adc.sequential_counting_adc(), "\n")
+                time.sleep(0.01)
+
+            except ValueError:
+                print("Вы ввели не число. Попробуйте ещё раз\n")
+
+    finally:
+        adc.deinit()
